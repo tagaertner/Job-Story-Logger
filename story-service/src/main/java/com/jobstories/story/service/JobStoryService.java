@@ -26,4 +26,10 @@ public class JobStoryService {
     public void deleteStory(Long id){
         jobStoryRepository.deleteById(id);
     }
+
+    public JobStory getStoryById(Long id){
+        return jobStoryRepository.findById(id)
+            .orElseThrow(()-> new RuntimeException("Story not found"));
+        
+    }
 }
