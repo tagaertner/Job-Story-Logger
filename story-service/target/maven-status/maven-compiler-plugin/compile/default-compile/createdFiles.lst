@@ -1,0 +1,5 @@
+com/jobstories/story/controller/JobStoryController.class
+com/jobstories/story/model/JobStory.class
+com/jobstories/story/StoryServiceApplication.class
+com/jobstories/story/service/JobStoryService.class
+com/jobstories/story/repository/JobStoryRepository.class

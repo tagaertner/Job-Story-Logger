@@ -7,6 +7,8 @@ import com.jobstories.story.model.JobStory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
+
 @RestController
 public class JobStoryController {
 
@@ -21,9 +23,15 @@ public class JobStoryController {
         return "Story service is running";
     }
 
-    
     @PostMapping("/stories")
     public JobStory createStory(@RequestBody JobStory story) {
         return jobStoryService.createStory(story);
 }
+
+    @GetMapping("/stories")
+    public List<JobStory> getAllStories(){
+        return jobStoryService.getAllStories();
+    }
+
+
 }
