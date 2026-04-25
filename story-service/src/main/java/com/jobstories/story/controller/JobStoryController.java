@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 import java.util.List;
 
 @RestController
@@ -38,6 +39,11 @@ public class JobStoryController {
     @DeleteMapping("/stories/{id}")
     public void deleteStory(@PathVariable Long id){
         jobStoryService.deleteStory(id);
+    }
+
+    @GetMapping("/stories/{id}")
+    public JobStory getStoryById(@PathVariable Long id){
+        return jobStoryService.getStoryById(id);
     }
 
 
