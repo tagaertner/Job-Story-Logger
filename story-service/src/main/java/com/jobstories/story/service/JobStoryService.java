@@ -22,4 +22,8 @@ public class JobStoryService {
     public List<JobStory> getAllStories(){
         return jobStoryRepository.findAll();
     }
+
+    public void deleteStory(Long id){
+        jobStoryRepository.deleteById(id);
+    }
 }
