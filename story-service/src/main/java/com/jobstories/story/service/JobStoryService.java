@@ -32,4 +32,20 @@ public class JobStoryService {
             .orElseThrow(()-> new RuntimeException("Story not found"));
         
     }
+
+   public JobStory updateStory(Long id, JobStory updatedStory) {
+
+    JobStory existingStory = getStoryById(id);
+
+    existingStory.setTitle(updatedStory.getTitle());
+    existingStory.setBody(updatedStory.getBody());
+    existingStory.setDate(updatedStory.getDate());
+    existingStory.setMood(updatedStory.getMood());
+
+    return jobStoryRepository.save(existingStory);
+
+}
+
+
+      
 }
