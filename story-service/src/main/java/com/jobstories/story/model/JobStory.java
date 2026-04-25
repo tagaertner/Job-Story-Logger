@@ -24,6 +24,14 @@ public class JobStory {
 
     }
 
+    public JobStory(Long id, String title, String body, LocalDate date, String mood){
+          this.id = id;
+          this.title = title;
+          this.body = body;
+          this.date = date;
+          this.mood = mood;
+    }
+
     public String getTitle(){
         return title;
     }
