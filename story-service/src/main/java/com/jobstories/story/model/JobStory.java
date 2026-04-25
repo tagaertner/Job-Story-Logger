@@ -5,10 +5,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+// Tells JPA/Hibernate this class maps to a database table
 @Entity
 public class JobStory {
 
-     @Id
+     @Id // Marks this field as the primary key
+     // Lets the database auto-gen the ID
      @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
@@ -17,6 +19,7 @@ public class JobStory {
     private LocalDate date;
     private String mood;
 
+    // Need this no-arg constructor so Spring and the db can create obj automaticaly
     public JobStory(){
 
     }
@@ -58,7 +61,7 @@ public class JobStory {
         return mood;
    }
 
-   public void setMood(){
+   public void setMood(String mood){
         this.mood = mood;
    }
 }

@@ -4,6 +4,8 @@ import com.jobstories.story.repository.JobStoryRepository;
 import org.springframework.stereotype.Service;
 import com.jobstories.story.model.JobStory;
 
+import java.util.List;
+
 @Service
 public class JobStoryService {
 
@@ -15,5 +17,9 @@ public class JobStoryService {
 
     public JobStory createStory(JobStory story){
         return jobStoryRepository.save(story);
+    }
+
+    public List<JobStory> getAllStories(){
+        return jobStoryRepository.findAll();
     }
 }
