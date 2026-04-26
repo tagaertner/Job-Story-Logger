@@ -54,5 +54,9 @@ public class JobStoryService {
         return jobStoryRepository.findAll(pageable);
     }
 
+    public List<JobStory> searchStories(String query){
+        return jobStoryRepository
+            .findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(query, query);
+    }
       
 }
