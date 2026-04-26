@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.time.LocalDate;
 
 @Service
 public class JobStoryService {
@@ -58,5 +59,11 @@ public class JobStoryService {
         return jobStoryRepository
             .findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(query, query);
     }
+
+    public List<JobStory> fileStoriesByDate(LocalDate from, LocalDate to){
+        return jobStoryRepository
+            .findByDateBetween(from, to);
+    }
+
       
 }

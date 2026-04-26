@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Page;
 
-
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -60,8 +60,13 @@ public class JobStoryController {
     }
 
     @GetMapping("/stories/search")
-    public List<JobStory> seaJobStories(@RequestParam String query){
+    public List<JobStory> searchJobStories(@RequestParam String query){
         return jobStoryService.searchStories(query);
+    }
+
+    @GetMapping("stories/filter")
+    public List<JobStory> fileStoriesByDate(@RequestParam LocalDate from, @RequestParam LocalDate to){
+        return jobStoryService.fileStoriesByDate((from), to);
     }
 
 }
