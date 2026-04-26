@@ -9,6 +9,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.time.LocalDate;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class JobStoryService {
@@ -46,13 +49,15 @@ public class JobStoryService {
     existingStory.setDate(updatedStory.getDate());
     existingStory.setMood(updatedStory.getMood());
 
-    return jobStoryRepository.save(existingStory);
+    return jobStoryRepository
+        .save(existingStory);
 
 }
 
     public Page<JobStory> getStoriesPaginated(int page, int size){
         Pageable pageable = PageRequest.of(page, size);
-        return jobStoryRepository.findAll(pageable);
+        return jobStoryRepository
+            .findAll(pageable);
     }
 
     public List<JobStory> searchStories(String query){
@@ -69,5 +74,27 @@ public class JobStoryService {
         return jobStoryRepository.findAllByOrderByDateDesc();
     }
 
+    public List<JobStory> getStoriesOldestFirst(){
+        return jobStoryRepository.findAllByOrderByDateAsc();
+    }
+
+    public List<JobStory> getStoriesByMood(String mood){
+        return jobStoryRepository
+            .findByMood(mood);
+    }
+
+    public long getStoryCount(){
+        return jobStoryRepository  
+            .count();
+    }
+
+    public Map<LocalDate, Long> getUsageHistory(){
+        return jobStoryRepository.findAll()
+            .stream()
+            .collect(Collectors.groupingBy(
+                JobStory::getDate,
+                Collectors.counting()
+            ));
+    }
       
 }
