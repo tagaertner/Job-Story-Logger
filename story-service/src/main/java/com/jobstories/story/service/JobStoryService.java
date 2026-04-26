@@ -65,5 +65,9 @@ public class JobStoryService {
             .findByDateBetween(from, to);
     }
 
+    public List<JobStory> getStoriesNewestFirst(){
+        return jobStoryRepository.findAllByOrderByDateDesc();
+    }
+
       
 }
