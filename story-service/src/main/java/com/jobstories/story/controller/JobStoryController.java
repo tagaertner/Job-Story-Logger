@@ -59,4 +59,9 @@ public class JobStoryController {
         return jobStoryService.getStoriesPaginated(page, size);
     }
 
+    @GetMapping("/stories/search")
+    public List<JobStory> seaJobStories(@RequestParam String query){
+        return jobStoryService.searchStories(query);
+    }
+
 }
