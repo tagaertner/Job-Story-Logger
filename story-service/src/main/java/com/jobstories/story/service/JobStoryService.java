@@ -3,6 +3,9 @@ package com.jobstories.story.service;
 import com.jobstories.story.repository.JobStoryRepository;
 import org.springframework.stereotype.Service;
 import com.jobstories.story.model.JobStory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -46,6 +49,10 @@ public class JobStoryService {
 
 }
 
+    public Page<JobStory> getStoriesPaginated(int page, int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return jobStoryRepository.findAll(pageable);
+    }
 
       
 }
