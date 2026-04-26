@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import com.jobstories.story.exception.ResourceNotFoundException;
 
 @Service
 public class JobStoryService {
@@ -36,7 +36,7 @@ public class JobStoryService {
 
     public JobStory getStoryById(Long id){
         return jobStoryRepository.findById(id)
-            .orElseThrow(()-> new RuntimeException("Story not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Story not found with id: " + id));
         
     }
 
