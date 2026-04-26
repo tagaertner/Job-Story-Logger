@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 
 import java.util.List;
@@ -50,6 +52,11 @@ public class JobStoryController {
     @PutMapping("/stories/{id}")
     public JobStory updateStory(@PathVariable Long id, @RequestBody JobStory updatedStory){
         return jobStoryService.updateStory(id, updatedStory);
+    }
+
+    @GetMapping("/stories/paginated")
+    public Page<JobStory> getStoriesPaginated(@RequestParam int page, @RequestParam int size){
+        return jobStoryService.getStoriesPaginated(page, size);
     }
 
 }
