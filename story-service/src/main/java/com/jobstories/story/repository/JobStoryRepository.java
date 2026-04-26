@@ -13,6 +13,9 @@ public interface JobStoryRepository extends JpaRepository<JobStory, Long> {
     List<JobStory> findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(String title, String body);
     List<JobStory> findByDateBetween(LocalDate from, LocalDate to);
     List<JobStory> findAllByOrderByDateDesc();
+    List<JobStory> findAllByOrderByDateAsc();
+    List<JobStory> findByMood(String mood);
+    
 
 }
 

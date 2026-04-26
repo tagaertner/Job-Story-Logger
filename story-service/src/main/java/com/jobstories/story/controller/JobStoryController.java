@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class JobStoryController {
@@ -64,9 +66,33 @@ public class JobStoryController {
         return jobStoryService.searchStories(query);
     }
 
-    @GetMapping("stories/filter")
+    @GetMapping("/stories/filter")
     public List<JobStory> fileStoriesByDate(@RequestParam LocalDate from, @RequestParam LocalDate to){
         return jobStoryService.fileStoriesByDate((from), to);
     }
 
+    @GetMapping("/stories/mood")
+    public List<JobStory> getStoriesByMood(@RequestParam String mood){
+        return jobStoryService.getStoriesByMood(mood);
+    }
+
+    @GetMapping("/stories/count")
+    public long getStoryCount(){
+        return jobStoryService.getStoryCount();
+    }
+
+    @GetMapping("/stories/oldest")
+    public List<JobStory> getStoriesOldestFirst(){
+        return jobStoryService.getStoriesOldestFirst();
+    }
+
+    @GetMapping("/stories/newest")
+    public List<JobStory> getStoriesNewestFirst(){
+        return jobStoryService.getStoriesNewestFirst();
+    }
+
+    @GetMapping("/stories/usage-history")
+    public Map<LocalDate,Long> getUsageHistory(){
+        return jobStoryService.getUsageHistory();
+    }
 }
