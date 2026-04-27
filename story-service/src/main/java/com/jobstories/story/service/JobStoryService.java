@@ -65,7 +65,7 @@ public class JobStoryService {
             .findByTitleContainingIgnoreCaseOrBodyContainingIgnoreCase(query, query);
     }
 
-    public List<JobStory> fileStoriesByDate(LocalDate from, LocalDate to){
+    public List<JobStory> filterStoriesByDate(LocalDate from, LocalDate to){
         return jobStoryRepository
             .findByDateBetween(from, to);
     }
