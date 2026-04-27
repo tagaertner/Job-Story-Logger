@@ -1,5 +1,7 @@
 package com.jobstories.story.model;
 import java.time.LocalDate;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import jakarta.persistence.Column;
 
 // Tells JPA/Hibernate this class maps to a database table
 @Entity
@@ -23,6 +26,7 @@ public class JobStory {
     private String title;
 
     @NotBlank(message = "Body cannot be empty")
+    @Column(length = 5000)
     private String body;
 
     @NotNull(message = "Date is required")
