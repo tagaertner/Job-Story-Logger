@@ -1,6 +1,9 @@
 package com.jobstories.story.controller;
 
 import com.jobstories.story.service.JobStoryService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.jobstories.story.model.JobStory;
@@ -10,8 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.boot.autoconfigure.batch.BatchProperties.Job;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,7 +36,8 @@ public class JobStoryController {
     }
 
     @PostMapping("/stories")
-    public JobStory createStory(@RequestBody JobStory story) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public JobStory createStory(@Valid @RequestBody JobStory story) {
         return jobStoryService.createStory(story);
 }
 
@@ -67,8 +72,8 @@ public class JobStoryController {
     }
 
     @GetMapping("/stories/filter")
-    public List<JobStory> fileStoriesByDate(@RequestParam LocalDate from, @RequestParam LocalDate to){
-        return jobStoryService.fileStoriesByDate((from), to);
+    public List<JobStory> filterStoriesByDate(@RequestParam LocalDate from, @RequestParam LocalDate to){
+        return jobStoryService.filterStoriesByDate((from), to);
     }
 
     @GetMapping("/stories/mood")
