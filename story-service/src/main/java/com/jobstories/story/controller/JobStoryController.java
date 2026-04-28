@@ -1,12 +1,12 @@
 package com.jobstories.story.controller;
 
 import com.jobstories.story.service.JobStoryService;
+import com.jobstories.story.model.JobStory;
 
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.jobstories.story.model.JobStory;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
