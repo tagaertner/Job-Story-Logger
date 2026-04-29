@@ -6,7 +6,12 @@ from handlers.story_handlers import (
     handle_get_stories_by_mood,
     handle_get_all_stories,
     handle_update_story,
-    handle_get_stories_paginated
+    handle_get_stories_paginated,
+    handle_search_job_stories,
+    handle_get_stories_newest_first,
+    handle_get_stories_oldest_first,
+    handle_get_story_count,
+    handle_get_usage_history    
 )
 
 def build_interface():
@@ -47,6 +52,23 @@ def build_interface():
 
             pagination_button = gr.Button("Load Page")
             pagination_output = gr.JSON(label="Paginated Results")
+            
+            gr.Markdown("### Search Stories")
+            search_query = gr.Textbox(label="Search title/body")
+            search_button = gr.Button("Search")
+            search_output = gr.JSON(label="Search Results")
+
+            gr.Markdown("### Sort Stories")
+            newest_button = gr.Button("Newest First")
+            oldest_button = gr.Button("Oldest First")
+            sort_output = gr.JSON(label="Sorted Stories")
+
+            gr.Markdown("### Usage")
+            count_button = gr.Button("Story Count")
+            count_output = gr.Textbox(label="Total Stories")
+
+            history_button = gr.Button("Usage History")
+            history_output = gr.JSON(label="Usage History")
 
         with gr.Tab("Update Story"):
             update_id = gr.Number(label="Story ID")
@@ -102,6 +124,32 @@ def build_interface():
             fn=handle_get_stories_paginated,
             inputs=[page, size],
             outputs=pagination_output
+        )
+        
+        search_button.click(
+        fn=handle_search_job_stories,
+        inputs=search_query,
+        outputs=search_output
+        )
+
+        newest_button.click(
+        fn=handle_get_stories_newest_first,
+        outputs=sort_output
+        )
+
+        oldest_button.click(
+        fn=handle_get_stories_oldest_first,
+        outputs=sort_output
+        )
+
+        count_button.click(
+        fn=handle_get_story_count,
+        outputs=count_output
+        )
+
+        history_button.click(
+        fn=handle_get_usage_history,
+        outputs=history_output
         )
 
     return demo

@@ -51,10 +51,6 @@ public class JobStoryController {
         jobStoryService.deleteStory(id);
     }
 
-    @GetMapping("/stories/{id}")
-    public JobStory getStoryById(@PathVariable Long id){
-        return jobStoryService.getStoryById(id);
-    }
 
     @PutMapping("/stories/{id}")
     public JobStory updateStory(@PathVariable Long id, @RequestBody JobStory updatedStory){
@@ -99,5 +95,10 @@ public class JobStoryController {
     @GetMapping("/stories/usage-history")
     public Map<LocalDate,Long> getUsageHistory(){
         return jobStoryService.getUsageHistory();
+    }
+
+     @GetMapping("/stories/{id}")
+    public JobStory getStoryById(@PathVariable Long id){
+        return jobStoryService.getStoryById(id);
     }
 }

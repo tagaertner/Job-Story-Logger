@@ -146,16 +146,54 @@ def get_stories_paginated(page, size):
 
 
 def get_stories_newest_first():
-    pass
+    try:
+        response = requests.get(f"{API_URL}/stories/newest")
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not get newest stories: {e}"}
+
 
 def get_stories_oldest_first():
-    pass
+    try:
+        response = requests.get(f"{API_URL}/stories/oldest")
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not get chronological stories: {e}"}
+
 
 def get_story_count():
-    pass
+    try:
+        response = requests.get(f"{API_URL}/stories/count")
+        response.raise_for_status()
+        return response.text
+
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not get story count: {e}"}
+
 
 def get_usage_history():
-    pass
+    try:
+        response = requests.get(f"{API_URL}/stories/usage-history")
+        response.raise_for_status()
+        return response.json()
 
-def get_search_job_stories():
-    pass
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not get usage history: {e}"}
+
+
+def search_job_stories(query):
+    try:
+        params = {
+            "query": query
+        }
+
+        response = requests.get(f"{API_URL}/stories/search", params=params)
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not search stories: {e}"}
