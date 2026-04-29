@@ -49,15 +49,17 @@ def create_story(title, body, mood):
  
         
 def get_all_stories():
-    stories = response.json()
-    if not stories:
-        return f"❌ No stories found"
+
     try:
         response = requests.get(f"{API_URL}/stories")
         
         response.raise_for_status()
-        return response.json()
+        stories = response.json()
         
+        if not stories:
+                return f"❌ No stories found"
+        return stories
+            
     except requests.exceptions.RequestException as e:
         return {"error": f"❌ Could not get stories: {e}"}
     
@@ -90,15 +92,58 @@ def filter_stories_by_date(from_date, to_date):
 
 
 def get_stories_by_mood(mood):
+    try:
+        params = {
+            "mood":mood
+            
+        }
+        
+        response = requests.get(f"{API_URL}/stories/mood", params=params)
+        response.raise_for_status()
+        
+        return response.json()
+        
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not get stories by mood: {e}"}
 
-    pass
+    
 
-def update_story():
-    pass
+def update_story(story_id, title, body, mood):
+    payload = {
+        "title": title,
+        "body": body,
+        "mood": mood,
+        "date": str(date.today())
+    }
+    
+    try:
+        response = requests.put(f"{API_URL}/stories/{int(story_id)}", json=payload)
+        response.raise_for_status()
+
+        return response.json()
+
+    except requests.exceptions.RequestException as e:
+        return {"error": f"❌ Could not update story: {e}"}
+
 
 def get_stories_paginated(page, size):
+    
+    try:
+        page = max(0, int(page))
+        # size = max(1,int(size))
+        
+        params = {
+            "page":int(page),
+            "size":int(size)
+        }
+        
+        response = requests.get(f"{API_URL}/stories/paginated", params=params)
+        response.raise_for_status()
+        
+        return response.json()
+    except requests.exceptions.RequestException as e:
+         return {"error": f"❌ Could not get paginated stories: {e}"}
 
-    pass
 
 def get_stories_newest_first():
     pass
@@ -110,4 +155,7 @@ def get_story_count():
     pass
 
 def get_usage_history():
+    pass
+
+def get_search_job_stories():
     pass
