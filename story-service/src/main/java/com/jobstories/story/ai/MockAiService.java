@@ -8,6 +8,8 @@ public class MockAiService implements AiService{
     @Override
     public AiEnrichment analyzeStory(String storyText){
         return new AiEnrichment(
+  
+            " Mock Title: How I found the bug",
             "Mock summary: This story shows progress and reflection.",
             "debugging, learning, backend",
             "positive",

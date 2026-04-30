@@ -11,15 +11,24 @@ import java.util.List;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.jobstories.story.ai.AiEnrichment;
+import com.jobstories.story.ai.MockAiService;
 import com.jobstories.story.exception.ResourceNotFoundException;
 
 @Service
 public class JobStoryService {
 
     private final JobStoryRepository jobStoryRepository;
+    private final MockAiService mockAiService;
 
-    public JobStoryService(JobStoryRepository jobStoryRepository) {
+    public JobStoryService(JobStoryRepository jobStoryRepository, MockAiService mockAiService) {
         this.jobStoryRepository = jobStoryRepository;
+        this.mockAiService = mockAiService;
+    }
+
+    public AiEnrichment enrichJobStory(String storyText){
+        return mockAiService.analyzeStory(storyText);
     }
 
     public JobStory createStory(JobStory story){

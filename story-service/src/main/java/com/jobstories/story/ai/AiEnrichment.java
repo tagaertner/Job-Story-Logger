@@ -1,6 +1,7 @@
 package com.jobstories.story.ai;
 
 public class AiEnrichment{
+    private String title;
     private String summary;
     private String tags;
     private String sentiment;
@@ -8,13 +9,18 @@ public class AiEnrichment{
     private String skills;
     private String interviewTip;
 
-    public AiEnrichment(String summary, String tags, String sentiment, String category, String skills, String interviewTip){
+    public AiEnrichment(String title,String summary, String tags, String sentiment, String category, String skills, String interviewTip){
+        this.title = title;
         this.summary = summary;
         this.tags = tags;
         this.sentiment = sentiment;
         this.category = category;
         this.skills = skills;
         this.interviewTip = interviewTip;
+    }
+
+    public String getTitle(){
+        return title;
     }
 
     public String getSummary(){
