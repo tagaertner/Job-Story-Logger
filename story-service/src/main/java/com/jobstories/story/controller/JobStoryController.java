@@ -4,6 +4,7 @@ import com.jobstories.story.service.JobStoryService;
 import com.jobstories.story.model.JobStory;
 import com.jobstories.story.ai.MockAiService;
 import com.jobstories.story.ai.AiEnrichment;
+import com.jobstories.story.dto.EnrichStoryRequest;
 
 import jakarta.validation.Valid;
 
@@ -106,8 +107,9 @@ public class JobStoryController {
         return jobStoryService.getStoryById(id);
     }
     
+
     @PostMapping("/enrich")
-    public AiEnrichment enrichStory(@RequestBody String storyText){
-        return jobStoryService.enrichJobStory(storyText);
+    public AiEnrichment enrichStory(@RequestBody EnrichStoryRequest request){
+        return jobStoryService.enrichJobStory((request.getText()));
     }
 }
