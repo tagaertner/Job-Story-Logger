@@ -19,6 +19,7 @@ public class AiEnrichment{
         this.interviewTip = interviewTip;
     }
 
+
     public String getTitle(){
         return title;
     }
