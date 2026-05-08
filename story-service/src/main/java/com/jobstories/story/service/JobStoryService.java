@@ -28,10 +28,16 @@ public class JobStoryService {
     }
 
     public AiEnrichment enrichJobStory(String storyText){
+        if (storyText == null || storyText.isBlank()){
+            throw new RuntimeException("Story Text cannot be empty");
+        }
         return mockAiService.analyzeStory(storyText);
     }
 
     public JobStory createStory(JobStory story){
+        if (story.getBody() == null || story.getBody().isBlank()){
+            throw new RuntimeException("Story body cannot be empty");
+        }
         return jobStoryRepository.save(story);
     }
 
