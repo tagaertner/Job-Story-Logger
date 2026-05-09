@@ -152,7 +152,8 @@ class JobStoryServiceTest{
         AiEnrichment result = jobStoryService.enrichJobStory((body));
 
         assertThat(result).isNotNull();
-        assertThat(result.getTitle()).contains("Mock");
+        assertThat(result.getTitle()).isEqualTo("Database Performance Improvement");
+        assertThat(result.getCategory()).isEqualTo("Performance");
     }  
 
     @Test

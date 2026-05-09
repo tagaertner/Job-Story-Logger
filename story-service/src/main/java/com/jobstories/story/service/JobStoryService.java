@@ -13,25 +13,25 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.jobstories.story.ai.AiEnrichment;
-import com.jobstories.story.ai.MockAiService;
+import com.jobstories.story.ai.AiService;
 import com.jobstories.story.exception.ResourceNotFoundException;
 
 @Service
 public class JobStoryService {
 
     private final JobStoryRepository jobStoryRepository;
-    private final MockAiService mockAiService;
+    private final AiService aiService;
 
-    public JobStoryService(JobStoryRepository jobStoryRepository, MockAiService mockAiService) {
+    public JobStoryService(JobStoryRepository jobStoryRepository, AiService aiService) {
         this.jobStoryRepository = jobStoryRepository;
-        this.mockAiService = mockAiService;
+        this.aiService= aiService;
     }
 
     public AiEnrichment enrichJobStory(String storyText){
         if (storyText == null || storyText.isBlank()){
             throw new RuntimeException("Story Text cannot be empty");
         }
-        return mockAiService.analyzeStory(storyText);
+        return aiService.analyzeStory(storyText);
     }
 
     public JobStory createStory(JobStory story){
