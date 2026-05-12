@@ -2,7 +2,6 @@ package com.jobstories.story.controller;
 
 import com.jobstories.story.service.JobStoryService;
 import com.jobstories.story.model.JobStory;
-import com.jobstories.story.ai.MockAiService;
 import com.jobstories.story.ai.AiEnrichment;
 import com.jobstories.story.dto.EnrichStoryRequest;
 

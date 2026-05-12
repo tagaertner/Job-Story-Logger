@@ -176,4 +176,31 @@ class JobStoryServiceTest{
             .isInstanceOf(RuntimeException.class);
     }
 
+    @Test
+    void enrichJobStory_shouldReturnDebuggingCategory(){
+        // Arrange
+        String body = "I debugged a backend error in production";
+
+        // Act
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        // Assert
+        assertThat(result.getCategory()).isEqualTo("Debugging");
+        assertThat(result.getTitle()).isEqualTo("Debugging a Backend Issue");
+    }
+
+    @Test
+    void enrichJobStory_shouldReturnCollaborationCategory(){
+        // Arrange
+        String body = "I paired with another engineer to solve a deployment issue.";
+
+        // Act
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        // Assert
+        assertThat(result.getCategory()).isEqualTo("Collaboration");
+    }
+
+    
+
 }
