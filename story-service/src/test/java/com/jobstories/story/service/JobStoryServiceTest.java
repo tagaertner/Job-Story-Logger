@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.refEq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -200,6 +201,59 @@ class JobStoryServiceTest{
         // Assert
         assertThat(result.getCategory()).isEqualTo("Collaboration");
     }
+
+    @Test
+    void enrichJobStory_shouldReturnBlockedCategory(){
+        // Arrange
+        String body = "I got blocked and then got unblocked, then blocked again";
+
+        //Act
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        //Assert
+        assertThat(result.getCategory()).isEqualTo("Blocker");
+        assertThat(result.getTitle()).isEqualTo("Blocked, But Not Defeated");
+    }
+
+    @Test
+    void enrichJobStory_shouldReturnDeployCategory(){
+        //Arrange
+        String body = "I managed my deploy and relese";
+
+        //Act 
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        //Assert
+        assertThat(result.getCategory()).isEqualTo("Deployment");
+        assertThat(result.getTags()).contains("backend");
+        
+    }
+
+    @Test
+    void enrichJobStory_shouldReturnMentorCategory(){
+        //Arrange
+        String body = "Thank God for my mentor";
+
+        //Act 
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        //Assert
+        assertThat(result.getCategory()).isEqualTo("Mentoring");
+        assertThat(result.getSummary()).contains("helping");
+    }
+
+    @Test
+    void enrichJobStory_shouldReturnLeadCategory() {
+        // Arrange
+        String body = "I planned a backend feature and owned the work.";
+
+        // Act
+        AiEnrichment result = jobStoryService.enrichJobStory(body);
+
+        // Assert
+        assertThat(result.getCategory()).isEqualTo("Leadership");
+        assertThat(result.getSkills()).contains("planning");
+}
 
     
 

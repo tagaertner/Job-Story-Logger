@@ -49,7 +49,53 @@ public class MockAiService implements AiService {
             );
         }
         
+        if (lowerBody.contains("blocked") || lowerBody.contains("stuck")) {
+            return new AiEnrichment(
+                "Blocked, But Not Defeated",
+                "This story describes getting stuck, identifying a blocker, and working through it instead of rage-quitting into the sunset.",
+                "blocker, problem solving, persistence",
+                "challenged",
+                "Blocker",
+                "debugging, communication, persistence",
+                "Use this story to explain what blocked you, how you asked for help or investigated, and what you learned."
+            );
+        }
 
+        if (lowerBody.contains("deploy") || lowerBody.contains("release")) {
+            return new AiEnrichment(
+                    "Deployment Drama, Handled",
+                    "This story describes working through a deployment or release task without letting the server goblins win.",
+                    "deployment, release, backend",
+                    "positive",
+                    "Deployment",
+                    "Spring Boot, backend development, release management",
+                    "Use this story to explain how you prepared, tested, released, and handled any issues."
+            );
+        }
+
+        if (lowerBody.contains("mentor") || lowerBody.contains("helped") || lowerBody.contains("explained")) {
+            return new AiEnrichment(
+                    "Helping Without Hovering",
+                    "This story describes helping someone understand a problem without grabbing the keyboard like a gremlin.",
+                    "mentoring, communication, support",
+                    "positive",
+                    "Mentoring",
+                    "communication, teaching, collaboration",
+                    "Use this story to show how you explained something clearly and helped someone grow."
+            );
+        }
+
+        if (lowerBody.contains("lead") || lowerBody.contains("owned") || lowerBody.contains("planned")) {
+            return new AiEnrichment(
+                    "Owning the Chaos",
+                    "This story describes taking ownership, planning the work, and keeping the chaos from becoming everyone’s new roommate.",
+                    "leadership, ownership, planning",
+                    "positive",
+                    "Leadership",
+                    "ownership, planning, communication",
+                    "Use this story to show how you took initiative, organized the work, and moved things forward."
+            );
+        }
         return new AiEnrichment(
                 "Engineering Learning Story",
                 "This story shows progress, reflection, and learning.",
