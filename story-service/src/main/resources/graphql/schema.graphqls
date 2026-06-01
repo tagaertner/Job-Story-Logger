@@ -1,0 +1,56 @@
+type JobStory {
+  id: ID!
+  title: String
+  body: String
+  date: String
+  mood: String
+}
+
+type Query {
+  stories: [JobStory]
+  story(id: ID!): JobStory
+  storiesPaginated(page: Int!, size: Int!): [JobStory]
+  searchStories(query: String!): [JobStory]
+  storiesByDateRange(from: String!, to: String!): [JobStory]
+  storiesNewestFirst: [JobStory]
+  storiesOldestFirst: [JobStory]
+  storiesByMood(mood: String!): [JobStory]
+  storyCount: Int
+  usageHistory: [UsageHistory]
+}
+
+type AiEnrichment {
+  title: String
+  summary: String
+  tags: String
+  sentiment: String
+  category: String
+  skills: String
+  interviewTip: String
+}
+
+type UsageHistory {
+  date: String
+  count: Int
+}
+
+input CreateJobStoryInput {
+  title: String!
+  body: String!
+  date: String!
+  mood: String
+}
+
+input UpdateJobStoryInput {
+  title: String
+  body: String
+  date: String
+  mood: String
+}
+
+type Mutation {
+  createStory(input: CreateJobStoryInput!): JobStory
+  enrichStory(text: String!): AiEnrichment
+  deleteStory(id: ID!): Boolean
+  updateStory(id: ID!, input: UpdateJobStoryInput!): JobStory
+}
