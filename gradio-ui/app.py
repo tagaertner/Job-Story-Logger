@@ -1,9 +1,12 @@
 from interface import build_interface
+import os
+
 
 """
  Main Gradio application entry point.
  Loads components and assembles the UI   
 """
+API_Base_URL = os.getenv("STORY_SERVICE_URL", "http://localhost:8080")
 
 if __name__ == "__main__":
     port = 7860

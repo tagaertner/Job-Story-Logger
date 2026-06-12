@@ -2,7 +2,7 @@ import requests
 import os
 from datetime import date
 
-API_URL = os.getenv("STORY_API_URL") or "http://localhost:8080"
+API_URL = os.getenv("STORY_SERVICE_URL", "http://localhost:8080")
 
 def api_request(method, path, payload=None,params=None):
     try:
@@ -76,6 +76,9 @@ def delete_story(story_id):
     
     
 def filter_stories_by_date(from_date, to_date): 
+    if not from_date or not to_date:
+        return {"error": "Please enter both from and to dates."}
+    
     try:
         params ={
             "from": from_date,
@@ -84,7 +87,8 @@ def filter_stories_by_date(from_date, to_date):
         
         response = requests.get(f"{API_URL}/stories/filter", params=params)
         response.raise_for_status()
-        
+        if not from_date or not to_date:
+            return {"error": "Please enter both from and to dates."}
         return response.json()
 
     except requests.exceptions.RequestException as e:
