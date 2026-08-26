@@ -2,9 +2,17 @@
 
 A backend service for logging and organizing engineering job stories, including wins, blockers, lessons learned, and mood tracking.
 
-## ⚠️ Work in Progress
+## Work in Progress
 
 The project is being developed incrementally with a focus on backend system design, testing strategy, and AI-assisted story enrichment. The long-term goal is to help engineers organize experiences for performance reviews, behavioral interviews, and career reflection.
+
+## Why This Project Exists
+
+I built this project in Java because I wanted to learn the language, and Spring Boot was a framework I already had a working foundation in from other projects. The goal was to apply a real domain problem, logging and organizing engineering work stories, to a language I was actively building skill in, rather than just working through a tutorial.
+
+## Why Mock AI First
+
+The AI enrichment layer was built with a mock service before any real model integration. The reasoning: start simple on purpose to prove the core flow works, find bugs faster, and understand each layer before adding complexity. `MockAiService` implements the same interface a real model would, so the enrichment pipeline, the service layer, and the tests around it, does not need to change when a real AI backend is swapped in later.
 
 ## Current Features
 
@@ -28,14 +36,7 @@ The project is being developed incrementally with a focus on backend system desi
 ### AI Enrichment (MVP)
 
 - Mock AI enrichment service
-- AI-generated:
-  - title
-  - summary
-  - tags
-  - sentiment
-  - category
-  - skills
-  - interview tips
+- AI-generated: title, summary, tags, sentiment, category, skills, interview tips
 - DTO request handling for `/stories/enrich`
 
 ### Persistence
@@ -76,7 +77,6 @@ The project is being developed incrementally with a focus on backend system desi
 
 ```text
 Controller → Service → Repository → Database
-
 AI Flow:
 Controller → JobStoryService → MockAiService → AiEnrichment
 ```
@@ -93,4 +93,6 @@ Controller → JobStoryService → MockAiService → AiEnrichment
 
 ## Running Locally
 
+```bash
 mvn spring-boot:run
+```
